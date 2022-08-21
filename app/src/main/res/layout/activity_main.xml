@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/text_view_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="AWI V0.1"
+            android:textColor="@color/green"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_view_result"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:background="@drawable/background_section"
+            android:layout_marginTop="30dp"
+
+            app:layout_constraintRight_toRightOf="parent">
+
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:checked="true"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/toogle_selector"
+                    android:id="@+id/radio_1"
+                    android:text="@string/spray"
+                    android:textAlignment="center"
+                    />
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/toogle_selector"
+                    android:id="@+id/radio_2"
+                    android:text="@string/spray"
+                    android:textAlignment="center"
+                    />
+
+        </RadioGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_view_result">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/sub_container_2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                        <TextView
+                            android:id="@+id/text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Section 1"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            app:layout_constraintBottom_toTopOf="@id/inner_1"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/inner_1"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_section"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text">
+
+                                <TextView
+                                    android:id="@+id/img_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/spray"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/sub_text_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@color/white"
+                                    android:text="Kelembapan"
+                                    android:textColor="@color/green"
+                                    android:textSize="10dp"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_initialize"
+                                    app:layout_constraintLeft_toRightOf="@id/img_1"
+                                    app:layout_constraintTop_toBottomOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_initialize"
+                                    android:layout_width="100dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/spray"
+                                    android:textColor="@color/white"
+                                    android:textSize="8dp"
+                                    app:layout_constraintBottom_toBottomOf="@id/inner_1"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_1" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/sub_container_1"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                        <TextView
+                            android:id="@+id/section_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Section 1"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            app:layout_constraintBottom_toTopOf="@id/inner_2"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/inner_2"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_section"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/section_2">
+
+                                <TextView
+                                    android:id="@+id/img_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/spray"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/sub_text_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@color/white"
+                                    android:text="Kelembapan"
+                                    android:textColor="@color/green"
+                                    android:textSize="10dp"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_2"
+                                    app:layout_constraintLeft_toRightOf="@id/img_2"
+                                    app:layout_constraintTop_toBottomOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_spray_2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/spray"
+                                    android:textColor="@color/white"
+                                    android:textSize="8dp"
+                                    app:layout_constraintBottom_toBottomOf="@id/inner_2"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_2" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

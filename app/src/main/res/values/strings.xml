@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AWI</string>
+    <string name="spray">Siram</string>
+    <string name="stop_spray">Stop</string>
+    <string name="initialize">Initialize</string>
+    <string name="stop_initialize">Stop Initialize</string>
+</resources>
