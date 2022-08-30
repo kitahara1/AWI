@@ -1,14 +1,20 @@
 package com.burung.awi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
+import com.burung.awi.constant.ParameterConst;
+import com.burung.awi.constant.ResponseConst;
+import com.burung.awi.model.ArduinoModel;
+import com.burung.awi.model.SprinklerModel;
+
+import java.io.IOException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -19,146 +25,437 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textViewResult;
+    private TextView textStatus;
+    private TextView sprayIndicatorLeft1;
+    private TextView sprayIndicatorRight1;
+    private TextView sprayIndicatorLeft2;
+    private TextView sprayIndicatorRight2;
+    private TextView sprayIndicatorLeft3;
+    private TextView sprayIndicatorRight3;
+    private TextView signalStatus;
     private JsonPlaceHolderAPI jsonPlaceHolderAPI;
 
-    private Button btnInitialize;
+    private String baseUrl;
+
+    private Button btnSprayLeft1;
+    private Button btnSprayRight1;
+    private Button btnSprayLeft2;
+    private Button btnSprayRight2;
+    private Button btnSprayLeft3;
+    private Button btnSprayRight3;
+    private Button btnSprayLeftAll;
+    private Button btnSprayRightAll;
+
+    private RadioButton radioWaterSource;
+    private RadioButton radioFertilizerSource;
+    private RadioButton radioAuto;
+    private RadioButton radioManual;
 
     private boolean initializeState = false;
+    private int sprinklerLeft1Status;
+    private int sprinklerRight1Status;
+    private int sprinklerLeft2Status;
+    private int sprinklerRight2Status;
+    private int sprinklerLeft3Status;
+    private int sprinklerRight3Status;
+    private int sprinklerLeftAllStatus;
+    private int sprinklerRightAllStatus;
+    private int systemStateStatus;
+
+    private Handler mHandler;
+    private long pingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = findViewById(R.id.text_view_result);
+        textStatus = findViewById(R.id.text_status);
+        signalStatus = findViewById(R.id.signal_status);
 
-        btnInitialize = findViewById(R.id.btn_initialize);
+        sprayIndicatorLeft1 = findViewById(R.id.spray_indicator_left_1);
+        sprayIndicatorRight1 = findViewById(R.id.spray_indicator_right_1);
+        sprayIndicatorLeft2 = findViewById(R.id.spray_indicator_left_2);
+        sprayIndicatorRight2 = findViewById(R.id.spray_indicator_right_2);
+        sprayIndicatorLeft3 = findViewById(R.id.spray_indicator_left_3);
+        sprayIndicatorRight3 = findViewById(R.id.spray_indicator_right_3);
+
+
+        btnSprayLeft1 = findViewById(R.id.btn_spray_left_1);
+        btnSprayRight1 = findViewById(R.id.btn_spray_right_1);
+        btnSprayLeft2 = findViewById(R.id.btn_spray_left_2);
+        btnSprayRight2 = findViewById(R.id.btn_spray_right_2);
+        btnSprayLeft3 = findViewById(R.id.btn_spray_left_3);
+        btnSprayRight3 = findViewById(R.id.btn_spray_right_3);
+        btnSprayLeftAll = findViewById(R.id.btn_spray_left_all);
+        btnSprayRightAll = findViewById(R.id.btn_spray_right_all);
+
+        radioWaterSource = findViewById(R.id.radio_water_source);
+        radioFertilizerSource = findViewById(R.id.radio_fertilizer_source);
+        radioAuto = findViewById(R.id.radio_auto);
+        radioManual = findViewById(R.id.radio_manual);
+
+        sprinklerLeft1Status = 91;
+        sprinklerRight1Status = 91;
+        sprinklerLeft2Status = 91;
+        sprinklerRight2Status = 91;
+        sprinklerLeft3Status = 91;
+        sprinklerRight3Status = 91;
+        sprinklerLeftAllStatus = 91;
+        sprinklerRightAllStatus = 91;
+
+
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
 
+        baseUrl = "http://192.168.100.169/";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.100.169/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
         jsonPlaceHolderAPI = retrofit.create(JsonPlaceHolderAPI.class);
 
-        btnInitialize.setOnClickListener(view -> {
-            initialize();
-
+        btnSprayLeft1.setOnClickListener(view -> {
+            if (sprinklerLeft1Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_1);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_1);
+            }
         });
-//        initialize();
-//        getComments();
-//        createPost();
-//        updatePost();
+        btnSprayRight1.setOnClickListener(view -> {
+            if (sprinklerRight1Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_1);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_1);
+            }
+        });
+        btnSprayLeft2.setOnClickListener(view -> {
+            if (sprinklerLeft2Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_2);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_2);
+            }
+        });
+        btnSprayRight2.setOnClickListener(view -> {
+            if (sprinklerRight2Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_2);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_2);
+            }
+        });
+        btnSprayLeft3.setOnClickListener(view -> {
+            if (sprinklerLeft3Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_3);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_3);
+            }
+        });
+        btnSprayRight3.setOnClickListener(view -> {
+            if (sprinklerRight3Status == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_3);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_3);
+            }
+        });
+        btnSprayLeftAll.setOnClickListener(view -> {
+            if (sprinklerLeftAllStatus == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_ALL);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_ALL);
+            }
+        });
+        btnSprayRightAll.setOnClickListener(view -> {
+            if (sprinklerRightAllStatus == ResponseConst.INACTIVE) {
+                turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_ALL);
+            } else {
+                turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_ALL);
+            }
+        });
+
+        radioWaterSource.setOnClickListener(view -> {
+            waterSource();
+        });
+        radioFertilizerSource.setOnClickListener(view -> {
+            fertilizerSource();
+        });
+        radioAuto.setOnClickListener(view -> {
+            setSystemState(ParameterConst.SYSTEM_STATE_AUTO);
+        });
+        radioManual.setOnClickListener(view -> {
+            setSystemState(ParameterConst.SYSTEM_STATE_MANUAL);
+        });
+        getSystemState();
+        mHandler = new Handler();
+        mPingChecker.run();
+
     }
-    public void initialize() {
-        Call<Initialize> call = jsonPlaceHolderAPI.startInitialize();
-        call.enqueue(new Callback<Initialize>() {
+    private void getSystemState() {
+        Call<SprinklerModel> call = jsonPlaceHolderAPI.getSystemState();
+        call.enqueue(new Callback<SprinklerModel>() {
             @Override
-            public void onResponse(Call<Initialize> call, Response<Initialize> response) {
-
+            public void onResponse(Call<SprinklerModel> call, Response<SprinklerModel> response) {
                 if (!response.isSuccessful()) {
-                    textViewResult.setText("Code : " + response.code());
-                    return;
+                    textStatus.setText(response.message());
                 }
-
-                if (initializeState) {
-                    btnInitialize.setText(R.string.initialize);
+                if (response.body().getSystemState() == ParameterConst.SYSTEM_STATE_MANUAL) {
+                    radioManual.setChecked(true);
                 } else {
-                    btnInitialize.setText(R.string.stop_initialize);
+                    radioAuto.setChecked(true);
                 }
-                initializeState = !initializeState;
-
+                systemStateStatus = response.body().getSystemState();
             }
 
             @Override
-            public void onFailure(Call<Initialize> call, Throwable t) {
-                return;
+            public void onFailure(Call<SprinklerModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
             }
         });
     }
-    private void getComments() {
-        Call<List<Comment>> call = jsonPlaceHolderAPI.getComments(3);
-        call.enqueue(new Callback<List<Comment>>() {
+
+    Runnable mPingChecker = new Runnable() {
+        @Override
+        public void run() {
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                long a = System.currentTimeMillis() % 1000;
+                Process ipProcess = runtime.exec("/system/bin/ping -c 1 " + baseUrl);
+                ipProcess.waitFor();
+                pingTime = System.currentTimeMillis() % 1000 - a;
+                signalStatus.setText(pingTime + " ms");
+            } catch (IOException e){
+                textStatus.setText(e.getMessage());
+            } catch (InterruptedException e) {
+                textStatus.setText(e.getMessage());
+            } finally {
+                mHandler.postDelayed(mPingChecker,5000);
+            }
+        }
+    };
+
+    private void turnOnSprinkler(String sprinkler) {
+        Call<SprinklerModel> call = jsonPlaceHolderAPI.turnOnSprinkler(sprinkler);
+        call.enqueue(new Callback<SprinklerModel>() {
             @Override
-            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+            public void onResponse(Call<SprinklerModel> call, Response<SprinklerModel> response) {
                 if (!response.isSuccessful()) {
-                    textViewResult.setText("Code : " + response.code());
-                    return;
+                    textStatus.setText(response.message());
                 }
-                List<Comment> comments = response.body();
-                for (Comment comment : comments) {
-                    String content = "";
-                    content += "ID: " + comment.getId() + "\n";
-                    content += "Post ID: " + comment.getPostId() + "\n";
-                    content += "Name: " + comment.getName() + "\n";
-                    content += "Email: " + comment.getEmail() + "\n";
-                    content += "Text: " + comment.getText() + "\n\n";
+                mapSprinklerState(sprinkler, response.body().getState());
 
-                    textViewResult.append(content);
-                }
+
             }
 
             @Override
-            public void onFailure(Call<List<Comment>> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+            public void onFailure(Call<SprinklerModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
             }
         });
     }
-    private void createPost() {
-        Post post = new Post(3, "New Title", "New Text");
-        Call<Post> call = jsonPlaceHolderAPI.createPost(post);
-        call.enqueue(new Callback<Post>() {
+    private void turnOffSprinkler(String sprinkler) {
+        Call<SprinklerModel> call = jsonPlaceHolderAPI.turnOffSprinkler(sprinkler);
+        call.enqueue(new Callback<SprinklerModel>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<SprinklerModel> call, Response<SprinklerModel> response) {
                 if (!response.isSuccessful()) {
-                    textViewResult.setText("Code : " + response.code());
-                    return;
+                    textStatus.setText(response.message());
                 }
-                Post postResponse = response.body();
-                String content = "";
-                content += "Code : " + response.code() + "\n";
-                content += "ID: " + postResponse.getId() + "\n";
-                content += "User ID: " + postResponse.getUserId() + "\n";
-                content += "Title: " + postResponse.getTitle() + "\n";
-                content += "Text: " + postResponse.getText() + "\n\n";
-                textViewResult.append(content);
+                mapSprinklerState(sprinkler, response.body().getState());
+
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+            public void onFailure(Call<SprinklerModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
             }
         });
     }
-    private void updatePost() {
-        Post post = new Post(12,null, "new Text");
-        Call<Post> call = jsonPlaceHolderAPI.patchtPost(5, post);
-        call.enqueue(new Callback<Post>() {
+
+
+    private void mapSprinklerState(String sprinkler, int state) {
+        switch (sprinkler) {
+            case ParameterConst.SPRINKLER_LEFT_1:
+                sprinklerLeft1Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayLeft1.setText(R.string.text_stop_spray);
+                    sprayIndicatorLeft1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayLeft1.setText(R.string.text_spray);
+                    sprayIndicatorLeft1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_RIGHT_1:
+                sprinklerRight1Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayRight1.setText(R.string.text_stop_spray);
+                    sprayIndicatorRight1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayRight1.setText(R.string.text_spray);
+                    sprayIndicatorRight1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_LEFT_2:
+                sprinklerLeft2Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayLeft2.setText(R.string.text_stop_spray);
+                    sprayIndicatorLeft2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayLeft2.setText(R.string.text_spray);
+                    sprayIndicatorLeft2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_RIGHT_2:
+                sprinklerRight2Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayRight2.setText(R.string.text_stop_spray);
+                    sprayIndicatorRight2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayRight2.setText(R.string.text_spray);
+                    sprayIndicatorRight2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_LEFT_3:
+                sprinklerLeft3Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayLeft3.setText(R.string.text_stop_spray);
+                    sprayIndicatorLeft3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayLeft3.setText(R.string.text_spray);
+                    sprayIndicatorLeft3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_RIGHT_3:
+                sprinklerRight3Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayRight3.setText(R.string.text_stop_spray);
+                    sprayIndicatorRight3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayRight3.setText(R.string.text_spray);
+                    sprayIndicatorRight3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_LEFT_ALL:
+                sprinklerLeftAllStatus = state;
+                sprinklerLeft1Status = state;
+                sprinklerLeft2Status = state;
+                sprinklerLeft3Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayLeft1.setText(R.string.text_stop_spray);
+                    btnSprayLeft2.setText(R.string.text_stop_spray);
+                    btnSprayLeft3.setText(R.string.text_stop_spray);
+                    btnSprayLeftAll.setText(R.string.text_stop_spray);
+                    sprayIndicatorLeft1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                    sprayIndicatorLeft2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                    sprayIndicatorLeft3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayLeft1.setText(R.string.text_spray);
+                    btnSprayLeft2.setText(R.string.text_spray);
+                    btnSprayLeft3.setText(R.string.text_spray);
+                    btnSprayLeftAll.setText(R.string.text_spray);
+                    sprayIndicatorLeft1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                    sprayIndicatorLeft2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                    sprayIndicatorLeft3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+            case ParameterConst.SPRINKLER_RIGHT_ALL:
+                sprinklerRightAllStatus = state;
+                sprinklerRight1Status = state;
+                sprinklerRight2Status = state;
+                sprinklerRight3Status = state;
+                if (state == ResponseConst.ACTIVE) {
+                    btnSprayRight1.setText(R.string.text_stop_spray);
+                    btnSprayRight2.setText(R.string.text_stop_spray);
+                    btnSprayRight3.setText(R.string.text_stop_spray);
+                    btnSprayRightAll.setText(R.string.text_stop_spray);
+                    sprayIndicatorRight1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                    sprayIndicatorRight2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                    sprayIndicatorRight3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
+                } else {
+                    btnSprayRight1.setText(R.string.text_spray);
+                    btnSprayRight2.setText(R.string.text_spray);
+                    btnSprayRight3.setText(R.string.text_spray);
+                    btnSprayRightAll.setText(R.string.text_spray);
+                    sprayIndicatorRight1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                    sprayIndicatorRight2.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                    sprayIndicatorRight3.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_off ));
+                }
+                break;
+        }
+        if (sprinklerRight1Status == ResponseConst.INACTIVE && sprinklerRight2Status == ResponseConst.INACTIVE && sprinklerRight3Status == ResponseConst.INACTIVE) {
+            btnSprayRightAll.setText(R.string.text_spray);
+            sprinklerRightAllStatus = ResponseConst.INACTIVE;
+        }
+        if (sprinklerLeft1Status == ResponseConst.INACTIVE && sprinklerLeft2Status == ResponseConst.INACTIVE && sprinklerLeft3Status == ResponseConst.INACTIVE) {
+            btnSprayLeftAll.setText(R.string.text_spray);
+            sprinklerLeftAllStatus = ResponseConst.INACTIVE;
+        }
+        if (sprinklerRight1Status == ResponseConst.ACTIVE && sprinklerRight2Status == ResponseConst.ACTIVE && sprinklerRight3Status == ResponseConst.ACTIVE) {
+            btnSprayRightAll.setText(R.string.text_stop_spray);
+            sprinklerRightAllStatus = ResponseConst.ACTIVE;
+        }
+        if (sprinklerLeft1Status == ResponseConst.ACTIVE && sprinklerLeft2Status == ResponseConst.ACTIVE && sprinklerLeft3Status == ResponseConst.ACTIVE) {
+            btnSprayLeftAll.setText(R.string.text_stop_spray);
+            sprinklerLeftAllStatus = ResponseConst.ACTIVE;
+        }
+        if (systemStateStatus == ParameterConst.SYSTEM_STATE_AUTO){
+            getSystemState();
+        }
+    }
+    private void waterSource() {
+        Call<ArduinoModel> call = jsonPlaceHolderAPI.waterSource();
+        call.enqueue(new Callback<ArduinoModel>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<ArduinoModel> call, Response<ArduinoModel> response) {
                 if (!response.isSuccessful()) {
-                    textViewResult.setText("Code : " + response.code());
-                    return;
+                    textStatus.setText(response.message());
                 }
-                Post postResponse = response.body();
-                String content = "";
-                content += "Code : " + response.code() + "\n";
-                content += "ID: " + postResponse.getId() + "\n";
-                content += "User ID: " + postResponse.getUserId() + "\n";
-                content += "Title: " + postResponse.getTitle() + "\n";
-                content += "Text: " + postResponse.getText() + "\n\n";
-                textViewResult.append(content);
+                textStatus.setText(R.string.text_success);
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+            public void onFailure(Call<ArduinoModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
+            }
+        });
+
+    }
+    private void fertilizerSource() {
+        Call<ArduinoModel> call = jsonPlaceHolderAPI.fertilizerSource();
+        call.enqueue(new Callback<ArduinoModel>() {
+            @Override
+            public void onResponse(Call<ArduinoModel> call, Response<ArduinoModel> response) {
+                if (!response.isSuccessful()) {
+                    textStatus.setText(response.message());
+                }
+                textStatus.setText(R.string.text_success);
+            }
+
+            @Override
+            public void onFailure(Call<ArduinoModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
             }
         });
     }
+    private void setSystemState(int systemState){
+        Call<ArduinoModel> call = jsonPlaceHolderAPI.setSystemState(systemState);
+        call.enqueue(new Callback<ArduinoModel>() {
+            @Override
+            public void onResponse(Call<ArduinoModel> call, Response<ArduinoModel> response) {
+                if (!response.isSuccessful()) {
+                    textStatus.setText(response.message());
+                }
+                systemStateStatus = systemState;
+                textStatus.setText(R.string.text_success);
+            }
+
+            @Override
+            public void onFailure(Call<ArduinoModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
+
+            }
+        });
+    }
+
 }

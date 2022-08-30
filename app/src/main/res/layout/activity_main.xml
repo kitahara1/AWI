@@ -4,31 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:layout_margin="15dp"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
+
         <TextView
-            android:id="@+id/text_view_result"
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="AWI V0.1"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_name"
             android:textColor="@color/green"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            />
+
+        <TextView
+            android:id="@+id/mode_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_mode"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/green"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/text_title"
+            app:layout_constraintStart_toStartOf="parent"
+             />
 
         <RadioGroup
+            android:id="@+id/radio_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/text_view_result"
+            app:layout_constraintTop_toBottomOf="@id/mode_title"
             app:layout_constraintLeft_toLeftOf="parent"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:background="@drawable/background_section"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
+            >
 
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/toogle_selector"
+                    android:id="@+id/radio_auto"
+                    android:text="@string/text_mode_auto"
+                    android:textAlignment="center"
+                    />
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/toogle_selector"
+                    android:id="@+id/radio_manual"
+                    android:text="@string/text_mode_manual"
+                    android:textAlignment="center"
+                    />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/source_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_source"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/green"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/radio_source"
+            app:layout_constraintTop_toBottomOf="@id/text_title"/>
+
+        <RadioGroup
+            android:id="@+id/radio_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:background="@drawable/background_section"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/source_title"
             app:layout_constraintRight_toRightOf="parent">
 
                 <RadioButton
@@ -37,8 +94,8 @@
                     android:checked="true"
                     android:button="@android:color/transparent"
                     android:background="@drawable/toogle_selector"
-                    android:id="@+id/radio_1"
-                    android:text="@string/spray"
+                    android:id="@+id/radio_water_source"
+                    android:text="@string/text_method_water"
                     android:textAlignment="center"
                     />
                 <RadioButton
@@ -46,8 +103,8 @@
                     android:layout_height="25dp"
                     android:button="@android:color/transparent"
                     android:background="@drawable/toogle_selector"
-                    android:id="@+id/radio_2"
-                    android:text="@string/spray"
+                    android:id="@+id/radio_fertilizer_source"
+                    android:text="@string/text_method_ferti"
                     android:textAlignment="center"
                     />
 
@@ -57,168 +114,558 @@
             android:id="@+id/container_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radio_source">
 
-            app:layout_constraintTop_toBottomOf="@+id/text_view_result">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sub_container_1"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/sub_container_1"
+                <TextView
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/text_left"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/inner_1"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintLeft_toRightOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/sub_container_2"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_spray_left_all"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="spread">
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@string/text_spray"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button"
+                    />
 
-                        <TextView
-                            android:id="@+id/text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Section 1"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toTopOf="@id/inner_1"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inner_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_section"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/inner_1"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/background_section"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            app:layout_constraintBottom_toTopOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/text">
+                    <TextView
+                        android:id="@+id/spray_indicator_left_1"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/spray_indicator_off"
+                        android:gravity="center"
+                        android:text="@string/text_1"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/img_1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:background="@drawable/button"
-                                    android:text="@string/spray"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/sub_text_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:text="@string/text_humidity"
+                        android:textAlignment="center"
+                        android:textColor="@color/green"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toTopOf="@id/btn_spray_left_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/sub_text_1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:background="@color/white"
-                                    android:text="Kelembapan"
-                                    android:textColor="@color/green"
-                                    android:textSize="10dp"
-                                    app:layout_constraintBottom_toTopOf="@id/btn_initialize"
-                                    app:layout_constraintLeft_toRightOf="@id/img_1"
-                                    app:layout_constraintTop_toBottomOf="parent" />
-
-                                <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/btn_initialize"
-                                    android:layout_width="100dp"
-                                    android:layout_height="15dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:background="@drawable/button"
-                                    android:text="@string/spray"
-                                    android:textColor="@color/white"
-                                    android:textSize="8dp"
-                                    app:layout_constraintBottom_toBottomOf="@id/inner_1"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/sub_text_1" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_spray_left_1"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/button"
+                        android:text="@string/text_spray"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@id/inner_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sub_text_1" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/sub_container_2"
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sub_container_2"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/section_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toRightOf="@+id/sub_container_1"
+                    android:text="@string/text_right"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/inner_2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_spray_right_all"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@string/text_spray"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inner_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_section"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/section_2">
+
+                    <TextView
+                        android:id="@+id/spray_indicator_right_1"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/spray_indicator_off"
+                        android:gravity="center"
+                        android:text="@string/text_2"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/sub_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:text="@string/text_humidity"
+                        android:textColor="@color/green"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toTopOf="@id/btn_spray_right_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_spray_right_1"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/button"
+                        android:text="@string/text_spray"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@id/inner_2"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sub_text_2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_3"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/background_section"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+
+                                <TextView
+                                    android:id="@+id/spray_indicator_left_2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/spray_indicator_off"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    android:text="@string/text_3"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/sub_text_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:text="@string/text_humidity"
+                                    android:textColor="@color/green"
+                                    android:textSize="13sp"
+                                    android:textAlignment="center"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_left_2"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_spray_left_2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/text_spray"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_3" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_4"
+                    android:layout_width="160dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_section"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread">
 
-                        <TextView
-                            android:id="@+id/section_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Section 1"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toTopOf="@id/inner_2"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/inner_2"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/background_section"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            app:layout_constraintBottom_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/section_2">
 
                                 <TextView
-                                    android:id="@+id/img_2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/spray_indicator_right_2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_marginStart="10dp"
-                                    android:background="@drawable/button"
-                                    android:text="@string/spray"
+                                    android:background="@drawable/spray_indicator_off"
+                                    android:text="@string/text_4"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/sub_text_2"
+                                    android:id="@+id/sub_text_4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
                                     android:background="@color/white"
-                                    android:text="Kelembapan"
+                                    android:text="@string/text_humidity"
                                     android:textColor="@color/green"
-                                    android:textSize="10dp"
-                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_2"
-                                    app:layout_constraintLeft_toRightOf="@id/img_2"
+                                    android:textSize="13sp"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_right_2"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
                                     app:layout_constraintTop_toBottomOf="parent" />
 
                                 <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/btn_spray_2"
+                                    android:id="@+id/btn_spray_right_2"
                                     android:layout_width="100dp"
-                                    android:layout_height="15dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="6dp"
                                     android:background="@drawable/button"
-                                    android:text="@string/spray"
+                                    android:text="@string/text_spray"
                                     android:textColor="@color/white"
-                                    android:textSize="8dp"
-                                    app:layout_constraintBottom_toBottomOf="@id/inner_2"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/sub_text_2" />
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_4" />
 
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_5"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@drawable/background_section"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                                <TextView
+                                    android:id="@+id/spray_indicator_left_3"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/spray_indicator_off"
+                                    android:text="@string/text_5"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/sub_text_5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:text="@string/text_humidity"
+                                    android:textColor="@color/green"
+                                    android:textSize="13sp"
+                                    android:textAlignment="center"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_left_3"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_spray_left_3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/text_spray"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_5" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sub_container_6"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@drawable/background_section"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                                <TextView
+                                    android:id="@+id/spray_indicator_right_3"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/spray_indicator_off"
+                                    android:text="@string/text_6"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/sub_text_6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:text="@string/text_humidity"
+                                    android:textColor="@color/green"
+                                    android:textSize="13sp"
+                                    app:layout_constraintBottom_toTopOf="@id/btn_spray_right_3"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_spray_right_3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="6dp"
+                                    android:background="@drawable/button"
+                                    android:text="@string/text_spray"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/sub_text_6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/container_3"
+        android:layout_marginTop="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/water_level"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <ImageView
+                android:id="@+id/water_level_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/waterlevel"/>
+            <TextView
+                android:id="@+id/water_level_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/water_level_img"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:text="@string/text_water_status"/>
+            <TextView
+                android:id="@+id/water_level_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/water_level_img"
+                app:layout_constraintTop_toBottomOf="@id/water_level_status"
+                android:textColor="@color/gray"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:text="@string/text_water_label"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/signal"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/signal_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/signal"/>
+            <TextView
+                android:id="@+id/signal_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/signal_img"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/text_signal_status"
+                android:textColor="@color/green"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/signal_img"
+                app:layout_constraintTop_toBottomOf="@id/signal_status"
+                android:text="@string/text_signal_label"
+                android:layout_marginStart="10dp"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/status_title"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/text_status_label"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toBottomOf="@id/status_title"
+            android:background="@drawable/status_background"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

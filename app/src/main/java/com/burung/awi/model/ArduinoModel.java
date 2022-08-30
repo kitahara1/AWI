@@ -1,6 +1,6 @@
-package com.burung.awi;
+package com.burung.awi.model;
 
-public class Initialize {
+public class ArduinoModel {
     private String responseMessage;
     private String statusCode;
 

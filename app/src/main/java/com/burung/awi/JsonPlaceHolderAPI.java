@@ -1,28 +1,28 @@
 package com.burung.awi;
 
-import java.util.List;
+import com.burung.awi.model.ArduinoModel;
+import com.burung.awi.model.SprinklerModel;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.PATCH;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface JsonPlaceHolderAPI {
     @GET("initialize-system")
-    Call<Initialize> startInitialize();
-    @GET("/posts/{id}/comments")
-    Call<List<Comment>> getComments(@Path("id") int postId);
+    Call<ArduinoModel> startInitialize();
+    @GET("turn-on-sprinkler")
+    Call<SprinklerModel> turnOnSprinkler(@Query("sprinkler") String sprinkler);
+    @GET("turn-off-sprinkler")
+    Call<SprinklerModel> turnOffSprinkler(@Query("sprinkler") String sprinkler);
+    @GET("source-fertilizer")
+    Call<ArduinoModel> fertilizerSource();
+    @GET("source-water")
+    Call<ArduinoModel> waterSource();
+    @GET("set-system-state")
+    Call<ArduinoModel> setSystemState(@Query("state") int systemState);
+    @GET("get-system-state")
+    Call<SprinklerModel> getSystemState();
 
-    @POST("posts")
-    Call<Post> createPost(@Body Post post);
 
-    @PUT("posts/{id}")
-    Call<Post> putPost(@Path("id") int id, @Body Post post);
-    @PATCH("posts/{id}")
-    Call<Post> patchtPost(@Path("id") int id, @Body Post post);
 
 }

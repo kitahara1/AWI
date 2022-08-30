@@ -1,7 +1,35 @@
 <resources>
     <string name="app_name">AWI</string>
-    <string name="spray">Siram</string>
-    <string name="stop_spray">Stop</string>
-    <string name="initialize">Initialize</string>
-    <string name="stop_initialize">Stop Initialize</string>
+    <string name="text_spray">Siram</string>
+    <string name="text_mode_auto">Otomatis</string>
+    <string name="text_mode_manual">Manual</string>
+    <string name="text_method_water">Air</string>
+    <string name="text_method_ferti">Pupuk</string>
+    <string name="text_stop_spray">Stop</string>
+    <string name="text_initialize">Initialize</string>
+    <string name="text_stop_initialize">Stop Initialize</string>
+    <string name="text_mode">Mode</string>
+    <string name="text_source">Sumber</string>
+    <string name="text_on">On</string>
+    <string name="text_off">Off</string>
+    <string name="text_water">Air</string>
+    <string name="text_ferti">Pupuk</string>
+    <string name="text_humidity">Kelembapan</string>
+    <string name="text_left">Kiri</string>
+    <string name="text_right">Kanan</string>
+    <string name="text_1">1</string>
+    <string name="text_2">2</string>
+    <string name="text_3">3</string>
+    <string name="text_4">4</string>
+    <string name="text_5">5</string>
+    <string name="text_6">6</string>
+    <string name="text_water_status">Liter</string>
+    <string name="text_water_label">Kapasitas Air</string>
+    <string name="text_signal_status">ms</string>
+    <string name="text_signal_label">Kekuatan Sinyal</string>
+    <string name="text_status_label">Status</string>
+
+    <string name="text_success">Berhasil</string>
+    <string name="text_failed">Gagal Terhubung, Silahkan Cek Koneksi Anda</string>
+
 </resources>
