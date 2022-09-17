@@ -2,6 +2,7 @@ package com.burung.awi;
 
 import com.burung.awi.model.ArduinoModel;
 import com.burung.awi.model.SprinklerModel;
+import com.burung.awi.model.TimeModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -22,6 +23,8 @@ public interface JsonPlaceHolderAPI {
     Call<ArduinoModel> setSystemState(@Query("state") int systemState);
     @GET("get-system-state")
     Call<SprinklerModel> getSystemState();
+    @GET("set-automatic-time")
+    Call<TimeModel> getTimeState();
 
 
 

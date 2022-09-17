@@ -12,11 +12,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.burung.awi.constant.ParameterConst;
 import com.burung.awi.constant.ResponseConst;
 import com.burung.awi.model.ArduinoModel;
 import com.burung.awi.model.SprinklerModel;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -41,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String baseUrl;
 
-    private Button btnSprayLeft1;
-    private Button btnSprayRight1;
-    private Button btnSprayLeft2;
-    private Button btnSprayRight2;
-    private Button btnSprayLeft3;
-    private Button btnSprayRight3;
-    private Button btnSprayLeftAll;
-    private Button btnSprayRightAll;
+    private TextView btnSprayLeft1;
+    private TextView btnSprayRight1;
+    private TextView btnSprayLeft2;
+    private TextView btnSprayRight2;
+    private TextView btnSprayLeft3;
+    private TextView btnSprayRight3;
+    private TextView btnSprayLeftAll;
+    private TextView btnSprayRightAll;
 
     private ConstraintLayout containerSprayL1;
     private ConstraintLayout containerSprayR1;
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_1);
             }
+
         });
         containerSprayR1.setOnClickListener(view -> {
             if (sprinklerRight1Status == ResponseConst.INACTIVE) {

@@ -14,4 +14,8 @@ public class ParameterConst {
     public static final int SYSTEM_STATE_AUTO = 71;
     public static final int SYSTEM_STATE_MANUAL = 72;
 
+    public static final int TIME_INDEX_1 = 1;
+    public static final int TIME_INDEX_2 = 2;
+    public static final int TIME_INDEX_3 = 3;
+
 }
