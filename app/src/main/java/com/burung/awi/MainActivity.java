@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.burung.awi.constant.BaseConst;
 import com.burung.awi.constant.ParameterConst;
 import com.burung.awi.constant.ResponseConst;
 import com.burung.awi.model.ArduinoModel;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView signalStatus;
     private JsonPlaceHolderAPI jsonPlaceHolderAPI;
 
-    private String baseUrl;
 
     private Button btnSprayLeft1;
     private Button btnSprayRight1;
@@ -133,9 +133,8 @@ public class MainActivity extends AppCompatActivity {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
 
-        baseUrl = "http://192.168.1.169/";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BaseConst.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
@@ -248,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             Runtime runtime = Runtime.getRuntime();
             try {
                 long a = System.currentTimeMillis() % 1000;
-                Process ipProcess = runtime.exec("/system/bin/ping -c 1 " + baseUrl);
+                Process ipProcess = runtime.exec("/system/bin/ping -c 1 " + BaseConst.BASE_URL);
                 ipProcess.waitFor();
                 pingTime = System.currentTimeMillis() % 1000 - a;
                 signalStatus.setText(pingTime + " ms");

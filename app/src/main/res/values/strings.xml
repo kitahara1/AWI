@@ -39,6 +39,11 @@
     <string name="text_menu_time_setting">Pengaturan Waktu</string>
     <string name="text_menu_fertilizer_setting">Pengaturan Pupuk</string>
 
+    <string name="text_open_fertilizer">Isi Bak Pupuk</string>
+    <string name="text_close_fertilizer">Hentikan Pengisian</string>
+    <string name="text_success_open_fertilizer">Pengisian Pupuk Berhasil</string>
+    <string name="text_success_close_fertilizer">Menghentikan Pengisian Pupuk</string>
+
     <string name="text_plus_hour">Tambah Jam</string>
     <string name="text_min_hour">Hapus Jam</string>
     <string name="text_hour_1">Atur Jam 1</string>
