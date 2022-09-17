@@ -33,6 +33,11 @@
     <string name="text_failed">Gagal Terhubung, Silahkan Cek Koneksi Anda</string>
 
     <string name="text_title_bar_settings">Pengaturan</string>
+    <string name="text_title_bar_time_settings">Pengaturan Waktu</string>
+    <string name="text_title_bar_fertilizer_settings">Pengaturan Pupuk</string>
+
+    <string name="text_menu_time_setting">Pengaturan Waktu</string>
+    <string name="text_menu_fertilizer_setting">Pengaturan Pupuk</string>
 
     <string name="text_plus_hour">Tambah Jam</string>
     <string name="text_min_hour">Hapus Jam</string>

@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class timeActivity extends AppCompatActivity {
+public class FertilizerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time);
+        setContentView(R.layout.activity_fertilizer);
+        getSupportActionBar().setTitle(R.string.text_title_bar_fertilizer_settings);
     }
 }
