@@ -1,11 +1,15 @@
 package com.burung.awi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -46,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSprayLeftAll;
     private Button btnSprayRightAll;
 
+    private ConstraintLayout containerSprayL1;
+    private ConstraintLayout containerSprayR1;
+    private ConstraintLayout containerSprayL2;
+    private ConstraintLayout containerSprayR2;
+    private ConstraintLayout containerSprayL3;
+    private ConstraintLayout containerSprayR3;
+
+    private ImageButton btnSettings;
+
     private RadioButton radioWaterSource;
     private RadioButton radioFertilizerSource;
     private RadioButton radioAuto;
@@ -70,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         textStatus = findViewById(R.id.text_status);
         signalStatus = findViewById(R.id.signal_status);
 
@@ -89,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
         btnSprayRight3 = findViewById(R.id.btn_spray_right_3);
         btnSprayLeftAll = findViewById(R.id.btn_spray_left_all);
         btnSprayRightAll = findViewById(R.id.btn_spray_right_all);
+
+        containerSprayL1 = findViewById(R.id.container_spray_l1);
+        containerSprayR1 = findViewById(R.id.container_spray_r1);
+        containerSprayL2 = findViewById(R.id.container_spray_l2);
+        containerSprayR2 = findViewById(R.id.container_spray_r2);
+        containerSprayL3 = findViewById(R.id.container_spray_l3);
+        containerSprayR3 = findViewById(R.id.container_spray_r3);
+
+        btnSettings = findViewById(R.id.btn_settings);
 
         radioWaterSource = findViewById(R.id.radio_water_source);
         radioFertilizerSource = findViewById(R.id.radio_fertilizer_source);
@@ -110,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
 
-        baseUrl = "http://192.168.100.169/";
+        baseUrl = "http://192.168.1.169/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -118,42 +141,42 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         jsonPlaceHolderAPI = retrofit.create(JsonPlaceHolderAPI.class);
 
-        btnSprayLeft1.setOnClickListener(view -> {
+        containerSprayL1.setOnClickListener(view -> {
             if (sprinklerLeft1Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_1);
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_1);
             }
         });
-        btnSprayRight1.setOnClickListener(view -> {
+        containerSprayR1.setOnClickListener(view -> {
             if (sprinklerRight1Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_1);
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_1);
             }
         });
-        btnSprayLeft2.setOnClickListener(view -> {
+        containerSprayL2.setOnClickListener(view -> {
             if (sprinklerLeft2Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_2);
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_2);
             }
         });
-        btnSprayRight2.setOnClickListener(view -> {
+        containerSprayR2.setOnClickListener(view -> {
             if (sprinklerRight2Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_2);
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_RIGHT_2);
             }
         });
-        btnSprayLeft3.setOnClickListener(view -> {
+        containerSprayL3.setOnClickListener(view -> {
             if (sprinklerLeft3Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_LEFT_3);
             } else {
                 turnOffSprinkler(ParameterConst.SPRINKLER_LEFT_3);
             }
         });
-        btnSprayRight3.setOnClickListener(view -> {
+        containerSprayR3.setOnClickListener(view -> {
             if (sprinklerRight3Status == ResponseConst.INACTIVE) {
                 turnOnSprinkler(ParameterConst.SPRINKLER_RIGHT_3);
             } else {
@@ -186,6 +209,10 @@ public class MainActivity extends AppCompatActivity {
         });
         radioManual.setOnClickListener(view -> {
             setSystemState(ParameterConst.SYSTEM_STATE_MANUAL);
+        });
+
+        btnSettings.setOnClickListener(view -> {
+            startSettings();
         });
         getSystemState();
         mHandler = new Handler();
@@ -230,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 textStatus.setText(e.getMessage());
             } finally {
-                mHandler.postDelayed(mPingChecker,5000);
+                mHandler.postDelayed(mPingChecker,10000);
             }
         }
     };
@@ -244,8 +271,7 @@ public class MainActivity extends AppCompatActivity {
                     textStatus.setText(response.message());
                 }
                 mapSprinklerState(sprinkler, response.body().getState());
-
-
+                textStatus.setText(R.string.text_success);
             }
 
             @Override
@@ -263,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                     textStatus.setText(response.message());
                 }
                 mapSprinklerState(sprinkler, response.body().getState());
-
+                textStatus.setText(R.string.text_success);
             }
 
             @Override
@@ -457,5 +483,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void startSettings() {
+        Intent settings = new Intent(this, SettingsActivity.class);
+        startActivity(settings);
+    }
 }

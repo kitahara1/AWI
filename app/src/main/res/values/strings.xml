@@ -32,4 +32,14 @@
     <string name="text_success">Berhasil</string>
     <string name="text_failed">Gagal Terhubung, Silahkan Cek Koneksi Anda</string>
 
+    <string name="text_title_bar_settings">Pengaturan</string>
+
+    <string name="text_plus_hour">Tambah Jam</string>
+    <string name="text_min_hour">Hapus Jam</string>
+    <string name="text_hour_1">Atur Jam 1</string>
+    <string name="text_hour_2">Atur Jam 2</string>
+    <string name="text_hour_3">Atur Jam 3</string>
+    <string name="text_start_hour">Jam Mulai</string>
+    <string name="text_end_hour">Jam Berhenti</string>
+
 </resources>

@@ -3,12 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable-anydpi/ic_settings.xml" value="0.207" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/background.xml" value="0.207" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/background_section.xml" value="0.207" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/ic_add_24.xml" value="0.207" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.207" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/radio_1.xml" value="0.1985" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/radio_2.xml" value="0.1985" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/settings_border.xml" value="0.1965" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/spray_indicator.xml" value="0.207" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/spray_indicator_off.xml" value="0.16" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/status_background.xml" value="0.207" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/layout/activity_main.xml" value="0.30440359127832406" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/toogle_selector.xml" value="0.1985" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/drawable/toogle_text_selector.xml" value="0.1975" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/layout/title_bar.xml" value="0.155622060709705" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/AWI3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/background_section.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.194" />
