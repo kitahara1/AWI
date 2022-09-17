@@ -22,9 +22,9 @@ public interface JsonPlaceHolderAPI {
     Call<ArduinoModel> setSystemState(@Query("state") int systemState);
     @GET("get-system-state")
     Call<SprinklerModel> getSystemState();
-    @GET("open-ferilizer-gate")
+    @GET("open-fertilizer-gate")
     Call<ArduinoModel> openFertilizer();
-    @GET("close-ferilizer-gate")
+    @GET("close-fertilizer-gate")
     Call<ArduinoModel> closeFertilizer();
 
 
