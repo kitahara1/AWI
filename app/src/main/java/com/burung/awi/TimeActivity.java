@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class timeActivity extends AppCompatActivity {
+public class TimeActivity extends AppCompatActivity {
     private String baseUrl = "http://192.168.1.169/";
     private JsonPlaceHolderAPI jsonPlaceHolderAPI;
 
@@ -30,5 +30,6 @@ public class timeActivity extends AppCompatActivity {
                 .build();
         jsonPlaceHolderAPI = retrofit.create(JsonPlaceHolderAPI.class);
 
+        getSupportActionBar().setTitle(R.string.text_title_bar_time_settings);
     }
 }

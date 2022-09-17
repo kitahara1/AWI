@@ -25,6 +25,10 @@ public interface JsonPlaceHolderAPI {
     Call<SprinklerModel> getSystemState();
     @GET("set-automatic-time")
     Call<TimeModel> getTimeState();
+    @GET("open-fertilizer-gate")
+    Call<ArduinoModel> openFertilizer();
+    @GET("close-fertilizer-gate")
+    Call<ArduinoModel> closeFertilizer();
 
 
 
