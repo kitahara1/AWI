@@ -33,7 +33,6 @@
     <string name="text_failed">Gagal Terhubung, Silahkan Cek Koneksi Anda</string>
 
     <string name="text_title_bar_settings">Pengaturan</string>
-    <string name="text_title_bar_time_settings">Atur Waktu Penyiraman</string>
     <string name="text_title_bar_time_settings">Pengaturan Waktu</string>
     <string name="text_title_bar_fertilizer_settings">Pengaturan Pupuk</string>
 
@@ -52,5 +51,7 @@
     <string name="text_hour_3">Atur Waktu 3</string>
     <string name="text_start_hour">Waktu Mulai</string>
     <string name="text_end_hour">Waktu Berhenti</string>
+    <string name="text_min_time_active">Minimal Harus Ada 1 Waktu Yang Aktif</string>
+    <string name="text_max_time_active">Maximal 3 Waktu Yang Aktif</string>
 
 </resources>

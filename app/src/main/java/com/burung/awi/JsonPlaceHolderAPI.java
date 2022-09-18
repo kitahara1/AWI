@@ -23,8 +23,31 @@ public interface JsonPlaceHolderAPI {
     Call<ArduinoModel> setSystemState(@Query("state") int systemState);
     @GET("get-system-state")
     Call<SprinklerModel> getSystemState();
-    @GET("set-automatic-time")
+    @GET("get-automatic-time")
     Call<TimeModel> getTimeState();
+    @GET("set-automatic-time")
+    Call<TimeModel> setStartTimeHour(
+            @Query("index") int index,
+            @Query("startHour") int startHour
+    );
+    @GET("set-automatic-time")
+    Call<TimeModel> setStartTimeMinute(
+            @Query("index") int index,
+            @Query("startMinute") int startHour
+    );
+    @GET("set-automatic-time")
+    Call<TimeModel> setEndTimeHour(
+            @Query("index") int index,
+            @Query("endHour") int startHour
+    );
+    @GET("set-automatic-time")
+    Call<TimeModel> setEndTimeMinute(
+            @Query("index") int index,
+            @Query("endMinute") int startHour
+    );
+    @GET("set-automatic-time-count")
+    Call<TimeModel> setActiveTime(@Query("time") int time);
+
     @GET("open-fertilizer-gate")
     Call<ArduinoModel> openFertilizer();
     @GET("close-fertilizer-gate")

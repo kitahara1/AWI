@@ -3,7 +3,7 @@
     <style name="Theme.AWI" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#e9efc0</item>
-        <item name="colorPrimaryVariant">#4e944f</item>
+        <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>
         <item name="colorOnPrimary">#4e944f</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
