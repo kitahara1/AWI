@@ -11,9 +11,10 @@
         android:id="@+id/button_time_setting"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/text_menu_time_setting"
+        android:textColor="@color/black"
         android:textAlignment="textStart"/>
 
     <Button
@@ -21,9 +22,58 @@
         android:inputType="none"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/button_time_setting"
         android:text="@string/text_menu_fertilizer_setting"
+        android:textColor="@color/black"
         android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/mode_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_auto_mode"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/button_fertilizer_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_auto_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/button_fertilizer_setting"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:background="@drawable/background_section"
+        android:layout_marginTop="20dp"
+        >
+
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/toogle_selector"
+            android:id="@+id/radio_auto"
+            android:text="@string/text_mode_auto_time"
+            android:textAlignment="center"
+            android:textColor="@drawable/toogle_text_selector"
+            />
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/toogle_selector"
+            android:id="@+id/radio_manual"
+            android:text="@string/text_mode_auto_sensor"
+            android:textAlignment="center"
+            android:textColor="@drawable/toogle_text_selector"
+            />
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

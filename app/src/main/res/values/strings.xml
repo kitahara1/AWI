@@ -2,6 +2,8 @@
     <string name="app_name">AWI</string>
     <string name="text_spray">Siram</string>
     <string name="text_mode_auto">Otomatis</string>
+    <string name="text_mode_auto_time">Waktu</string>
+    <string name="text_mode_auto_sensor">Sensor</string>
     <string name="text_mode_manual">Manual</string>
     <string name="text_method_water">Air</string>
     <string name="text_method_ferti">Pupuk</string>
@@ -9,6 +11,7 @@
     <string name="text_initialize">Initialize</string>
     <string name="text_stop_initialize">Stop Initialize</string>
     <string name="text_mode">Mode</string>
+    <string name="text_auto_mode">Mode Otomatis</string>
     <string name="text_source">Sumber</string>
     <string name="text_on">On</string>
     <string name="text_off">Off</string>
@@ -23,6 +26,8 @@
     <string name="text_4">4</string>
     <string name="text_5">5</string>
     <string name="text_6">6</string>
+    <string name="text_7">7</string>
+    <string name="text_8">8</string>
     <string name="text_water_status">Liter</string>
     <string name="text_water_label">Kapasitas Air</string>
     <string name="text_signal_status">ms</string>

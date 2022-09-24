@@ -569,12 +569,133 @@
                                     app:layout_constraintTop_toBottomOf="@id/sub_text_6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/container_3">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/container_spray_l4"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:background="@drawable/background_section"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintLeft_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="spread">
+
+                                        <TextView
+                                            android:id="@+id/spray_indicator_left_4"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginStart="10dp"
+                                            android:background="@drawable/spray_indicator_off"
+                                            android:text="@string/text_7"
+                                            android:textColor="@color/white"
+                                            android:gravity="center"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
+                                        <TextView
+                                            android:id="@+id/sub_text_7"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:background="@color/white"
+                                            android:text="@string/text_humidity"
+                                            android:textColor="@color/green"
+                                            android:textSize="13sp"
+                                            android:textAlignment="center"
+                                            app:layout_constraintBottom_toTopOf="@id/btn_spray_left_4"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintRight_toRightOf="parent"
+                                            app:layout_constraintTop_toBottomOf="parent" />
+
+                                        <TextView
+                                            android:id="@+id/btn_spray_left_4"
+                                            android:layout_width="100dp"
+                                            android:layout_height="20dp"
+                                            android:layout_marginTop="6dp"
+                                            android:layout_marginStart="10dp"
+                                            android:background="@drawable/button"
+                                            android:text="@string/text_spray"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp"
+                                            android:gravity="center"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintRight_toRightOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@id/sub_text_7" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/container_spray_r4"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:background="@drawable/background_section"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="spread">
+
+                                        <TextView
+                                            android:id="@+id/spray_indicator_right_4"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginStart="10dp"
+                                            android:background="@drawable/spray_indicator_off"
+                                            android:text="@string/text_8"
+                                            android:textColor="@color/white"
+                                            android:gravity="center"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
+                                        <TextView
+                                            android:id="@+id/sub_text_8"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:background="@color/white"
+                                            android:text="@string/text_humidity"
+                                            android:textColor="@color/green"
+                                            android:textSize="13sp"
+                                            app:layout_constraintBottom_toTopOf="@id/btn_spray_right_4"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintRight_toRightOf="parent"
+                                            app:layout_constraintTop_toBottomOf="parent" />
+
+                                        <TextView
+                                            android:id="@+id/btn_spray_right_4"
+                                            android:layout_width="100dp"
+                                            android:layout_height="20dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="6dp"
+                                            android:background="@drawable/button"
+                                            android:text="@string/text_spray"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp"
+                                            android:gravity="center"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintLeft_toLeftOf="parent"
+                                            app:layout_constraintRight_toRightOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@id/sub_text_8" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_4"
+        android:id="@+id/container_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/container_3"
+        app:layout_constraintTop_toBottomOf="@id/container_4"
         android:layout_marginTop="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -617,7 +738,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_5"
+        android:id="@+id/container_6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

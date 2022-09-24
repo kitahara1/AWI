@@ -23,6 +23,8 @@ public interface JsonPlaceHolderAPI {
     Call<ArduinoModel> setSystemState(@Query("state") int systemState);
     @GET("get-system-state")
     Call<SprinklerModel> getSystemState();
+    @GET("get-all-initial-state")
+    Call<ArduinoModel> getInitialState();
     @GET("get-automatic-time")
     Call<TimeModel> getTimeState();
     @GET("set-automatic-time")
