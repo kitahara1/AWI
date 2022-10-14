@@ -1,6 +1,7 @@
 package com.burung.awi;
 
 import com.burung.awi.model.ArduinoModel;
+import com.burung.awi.model.SensorModel;
 import com.burung.awi.model.SprinklerModel;
 import com.burung.awi.model.TimeModel;
 
@@ -54,6 +55,15 @@ public interface JsonPlaceHolderAPI {
     Call<ArduinoModel> openFertilizer();
     @GET("close-fertilizer-gate")
     Call<ArduinoModel> closeFertilizer();
+    @GET("get-minimum-soil-humidity-value")
+    Call<ArduinoModel> getMinimumSensorValue();
+    @GET("get-sensor-value")
+    Call<SensorModel> getSensorValue();
+    @GET("set-minimum-soil-humidity-value")
+    Call<SensorModel> setMinimumSensorValueUp(@Query("up") int value);
+    @GET("set-minimum-soil-humidity-value")
+    Call<SensorModel> setMinimumSensorValueDown(@Query("down") int value);
+
 
 
 

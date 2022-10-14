@@ -32,7 +32,7 @@
         android:id="@+id/mode_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_auto_mode"
+        android:text="@string/text_mode"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
         android:textColor="@color/black"
@@ -55,25 +55,85 @@
 
         <RadioButton
             android:layout_width="80dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:button="@android:color/transparent"
             android:background="@drawable/toogle_selector"
-            android:id="@+id/radio_auto"
+            android:id="@+id/radio_manual"
+            android:text="@string/text_mode_manual"
+            android:textAlignment="center"
+            android:textColor="@drawable/toogle_text_selector"
+            />
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:button="@android:color/transparent"
+            android:background="@drawable/toogle_selector"
+            android:id="@+id/radio_auto_time"
             android:text="@string/text_mode_auto_time"
             android:textAlignment="center"
             android:textColor="@drawable/toogle_text_selector"
             />
         <RadioButton
             android:layout_width="80dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:button="@android:color/transparent"
             android:background="@drawable/toogle_selector"
-            android:id="@+id/radio_manual"
+            android:id="@+id/radio_auto_sensor"
             android:text="@string/text_mode_auto_sensor"
             android:textAlignment="center"
             android:textColor="@drawable/toogle_text_selector"
             />
-
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/text_minimum_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_minimum_sensor"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/mode_title"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_minimum_sensor_value"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toRightOf="@id/text_minimum_sensor"
+        app:layout_constraintTop_toBottomOf="@id/radio_auto_mode"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_sensor_value_plus"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintLeft_toRightOf="@id/text_minimum_sensor_value"
+        app:layout_constraintTop_toBottomOf="@id/radio_auto_mode"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:visibility="gone"
+        />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_sensor_value_min"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_negative_24"
+        app:layout_constraintLeft_toRightOf="@id/btn_sensor_value_plus"
+        app:layout_constraintTop_toBottomOf="@id/radio_auto_mode"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:visibility="gone"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

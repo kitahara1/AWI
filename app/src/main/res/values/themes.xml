@@ -16,6 +16,7 @@
         <item name="android:background">#e9efc0</item>
         <item name="android:actionBarItemBackground">@color/green</item>
         <item name="android:textColor">@color/green</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
     </style>
     <style name="Theme.AWI.NoTitleBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -31,6 +32,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <!-- Customize your theme here. -->
         <item name="android:background">#e9efc0</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+
     </style>
 
 </resources>

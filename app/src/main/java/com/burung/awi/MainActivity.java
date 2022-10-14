@@ -15,6 +15,7 @@ import com.burung.awi.constant.BaseConst;
 import com.burung.awi.constant.ParameterConst;
 import com.burung.awi.constant.ResponseConst;
 import com.burung.awi.model.ArduinoModel;
+import com.burung.awi.model.SensorModel;
 import com.burung.awi.model.SprinklerModel;
 
 import java.io.IOException;
@@ -52,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView btnSprayLeftAll;
     private TextView btnSprayRightAll;
 
+    private TextView soilLeft1;
+    private TextView soilRight1;
+    private TextView soilLeft2;
+    private TextView soilRight2;
+    private TextView soilLeft3;
+    private TextView soilRight3;
+    private TextView soilLeft4;
+    private TextView soilRight4;
+
     private ConstraintLayout containerSprayL1;
     private ConstraintLayout containerSprayR1;
     private ConstraintLayout containerSprayL2;
@@ -65,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     private RadioButton radioWaterSource;
     private RadioButton radioFertilizerSource;
-    private RadioButton radioAuto;
-    private RadioButton radioManual;
 
     private boolean initializeState = false;
     private int sprinklerLeft1Status;
@@ -81,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
     private int sprinklerRightAllStatus;
     private int systemStateStatus;
     private int setSystemState;
+    private int sensor1;
+    private int sensor2;
+    private int sensor3;
+    private int sensor4;
+    private int sensor5;
+    private int sensor6;
+    private int sensor7;
+    private int sensor8;
 
     private Handler mHandler;
     private long pingTime;
@@ -93,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         textStatus = findViewById(R.id.text_status);
         signalStatus = findViewById(R.id.signal_status);
+
+        soilLeft1 = findViewById(R.id.text_soil_1);
+        soilRight1 = findViewById(R.id.text_soil_2);
+        soilLeft2 = findViewById(R.id.text_soil_3);
+        soilRight2 = findViewById(R.id.text_soil_4);
+        soilLeft3 = findViewById(R.id.text_soil_5);
+        soilRight3 = findViewById(R.id.text_soil_6);
+        soilLeft4 = findViewById(R.id.text_soil_7);
+        soilRight4 = findViewById(R.id.text_soil_8);
 
         sprayIndicatorLeft1 = findViewById(R.id.spray_indicator_left_1);
         sprayIndicatorRight1 = findViewById(R.id.spray_indicator_right_1);
@@ -128,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
         radioWaterSource = findViewById(R.id.radio_water_source);
         radioFertilizerSource = findViewById(R.id.radio_fertilizer_source);
-        radioAuto = findViewById(R.id.radio_auto);
-        radioManual = findViewById(R.id.radio_manual);
 
         sprinklerLeft1Status = 91;
         sprinklerRight1Status = 91;
@@ -231,43 +254,16 @@ public class MainActivity extends AppCompatActivity {
         radioFertilizerSource.setOnClickListener(view -> {
             fertilizerSource();
         });
-        radioAuto.setOnClickListener(view -> {
-            setSystemState(ParameterConst.SYSTEM_STATE_AUTO_TIME);
-        });
-        radioManual.setOnClickListener(view -> {
-            setSystemState(ParameterConst.SYSTEM_STATE_MANUAL);
-        });
 
         btnSettings.setOnClickListener(view -> {
             startSettings();
         });
-        getSystemState();
+        getInitialState();
         mHandler = new Handler();
         mPingChecker.run();
 
     }
-    private void getSystemState() {
-        Call<SprinklerModel> call = jsonPlaceHolderAPI.getSystemState();
-        call.enqueue(new Callback<SprinklerModel>() {
-            @Override
-            public void onResponse(Call<SprinklerModel> call, Response<SprinklerModel> response) {
-                if (!response.isSuccessful()) {
-                    textStatus.setText(response.message());
-                }
-                if (response.body().getSystemState() == ParameterConst.SYSTEM_STATE_MANUAL) {
-                    radioManual.setChecked(true);
-                } else {
-                    radioAuto.setChecked(true);
-                }
-                systemStateStatus = response.body().getSystemState();
-            }
 
-            @Override
-            public void onFailure(Call<SprinklerModel> call, Throwable t) {
-                textStatus.setText(R.string.text_failed);
-            }
-        });
-    }
     private void getInitialState() {
         Call<ArduinoModel> call = jsonPlaceHolderAPI.getInitialState();
         call.enqueue(new Callback<ArduinoModel>() {
@@ -276,11 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     textStatus.setText(response.message());
                 }
-                if (response.body().getSystemState() == ParameterConst.SYSTEM_STATE_MANUAL) {
-                    radioManual.setChecked(true);
-                } else {
-                    radioAuto.setChecked(true);
-                }
+
                 if (response.body().getSL1() == ResponseConst.ON){
                     btnSprayLeft1.setText(R.string.text_stop_spray);
                     sprayIndicatorLeft1.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.spray_indicator_on ));
@@ -315,10 +307,47 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 systemStateStatus = response.body().getSystemState();
+                getSensorValue();
+                textStatus.setText(R.string.text_initialize_success);
+
             }
 
             @Override
             public void onFailure(Call<ArduinoModel> call, Throwable t) {
+                textStatus.setText(R.string.text_failed);
+            }
+        });
+    }
+
+    private void getSensorValue(){
+        Call<SensorModel> call = jsonPlaceHolderAPI.getSensorValue();
+        call.enqueue(new Callback<SensorModel>() {
+            @Override
+            public void onResponse(Call<SensorModel> call, Response<SensorModel> response) {
+                if (!response.isSuccessful()) {
+                    textStatus.setText(response.message());
+                }
+                sensor1 = (response.body().getSensorLeft1() - 200) / 2;
+                sensor2 = (response.body().getSensorRight1() - 200) / 2;
+                sensor3 = (response.body().getSensorLeft2() - 200) / 2;
+                sensor4 = (response.body().getSensorRight2() - 200) / 2;
+                sensor5 = (response.body().getSensorLeft3() - 200) / 2;
+                sensor6 = (response.body().getSensorRight3() - 200) / 2;
+                sensor7 = (response.body().getSensorLeft4() - 200) / 2;
+                sensor8 = (response.body().getSensorRight4() - 200) / 2;
+
+                soilLeft1.setText(sensor1 + "%");
+                soilRight1.setText(sensor2 + "%");
+                soilLeft2.setText(sensor3 + "%");
+                soilRight2.setText(sensor4 + "%");
+                soilLeft3.setText(sensor5 + "%");
+                soilRight3.setText(sensor6 + "%");
+                soilLeft4.setText(sensor7 + "%");
+                soilRight4.setText(sensor8 + "%");
+            }
+
+            @Override
+            public void onFailure(Call<SensorModel> call, Throwable t) {
                 textStatus.setText(R.string.text_failed);
             }
         });
@@ -334,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
                 ipProcess.waitFor();
                 pingTime = System.currentTimeMillis() % 1000 - a;
                 signalStatus.setText(pingTime + " ms");
+                getInitialState();
             } catch (IOException e){
                 textStatus.setText(e.getMessage());
             } catch (InterruptedException e) {
@@ -538,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
             sprinklerLeftAllStatus = ResponseConst.ACTIVE;
         }
         if (systemStateStatus == ParameterConst.SYSTEM_STATE_AUTO_TIME){
-            getSystemState();
+            getInitialState();
         }
     }
     private void waterSource() {
@@ -576,25 +606,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void setSystemState(int systemState){
-        Call<ArduinoModel> call = jsonPlaceHolderAPI.setSystemState(systemState);
-        call.enqueue(new Callback<ArduinoModel>() {
-            @Override
-            public void onResponse(Call<ArduinoModel> call, Response<ArduinoModel> response) {
-                if (!response.isSuccessful()) {
-                    textStatus.setText(response.message());
-                }
-                systemStateStatus = systemState;
-                textStatus.setText(R.string.text_success);
-            }
 
-            @Override
-            public void onFailure(Call<ArduinoModel> call, Throwable t) {
-                textStatus.setText(R.string.text_failed);
-
-            }
-        });
-    }
     public void startSettings() {
         Intent settings = new Intent(this, SettingsActivity.class);
         startActivity(settings);

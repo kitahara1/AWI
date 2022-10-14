@@ -23,4 +23,8 @@ public class ParameterConst {
     public static final int TIME_PLUS = 1;
     public static final int TIME_MIN = 0;
 
+    public static final int SENSOR_VALUE_SET = 5;
+
+
+
 }

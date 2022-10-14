@@ -11,6 +11,7 @@
     <string name="text_initialize">Initialize</string>
     <string name="text_stop_initialize">Stop Initialize</string>
     <string name="text_mode">Mode</string>
+    <string name="text_minimum_sensor">Kelembapan</string>
     <string name="text_auto_mode">Mode Otomatis</string>
     <string name="text_source">Sumber</string>
     <string name="text_on">On</string>
@@ -35,6 +36,7 @@
     <string name="text_status_label">Status</string>
 
     <string name="text_success">Berhasil</string>
+    <string name="text_initialize_success">Koneksi Berhasil</string>
     <string name="text_failed">Gagal Terhubung, Silahkan Cek Koneksi Anda</string>
 
     <string name="text_title_bar_settings">Pengaturan</string>
